@@ -15,7 +15,7 @@ class SupportChara extends Component {
             return (
                 <div  className="row">
                  <div style={SupportStyle}>
-                  <img src={cristalSlimeImage} alt="monster" width="250" height="250" />
+                  <img src={cristalSlimeImage} alt="Support Character" width="250" height="250" />
                  </div>
                 </div>   
             );
@@ -24,7 +24,7 @@ class SupportChara extends Component {
             return (
                 <div style={SupportStyle} className="row">
                  <div>
-                  <img src={slimeImage} alt="monster" width="250" height="250" />
+                  <img src={slimeImage} alt="Support Character" width="250" height="250" />
                  </div>
                 </div>    
             );
