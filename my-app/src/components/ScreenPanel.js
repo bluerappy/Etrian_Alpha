@@ -3,6 +3,7 @@ import { Row, Col } from 'reactstrap';
 import SwordCount from './swordCount'
 import LifePotionCount from './lifePotionCount';
 import SupportChara from './SupportChara';
+import MonstersChara from './monstersChara';
 import HealthBar from './healthBar';
 
 const divStyle = {
@@ -35,6 +36,7 @@ _onClickLifePotion() {
                 <Col xs={"2"}>
                     <div style={divStyle}>
                         <SupportChara swordCount={this.props.swordCount}/>
+                        <MonstersChara monsterStats={this.props.monsterStats}/>
                         <HealthBar health={this.props.health}/>
                         <div onClick={()=>this._onClickSword()}> 
                            <SwordCount swordCount={this.props.swordCount}/>
