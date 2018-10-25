@@ -12,14 +12,13 @@ const monsterStyle = {
 
 class MonstersChara extends Component {
     render() {
-        const monsterStats = this.props.monsterStats;
-        console.log("MA", monsterStats.monsterAppearance)
-        if(monsterStats.monsterAppearance === true) {
+        console.log("MA", this.props.monsterStats)
+        if(this.props.monsterStats.monsterAppearance === true) {
             return (
                 <div  className="row">
                  <div style={monsterStyle}>
                   <img src={nuclearSlime} alt="monster" width="250" height="250" />
-                     <p>{monsterStats.monsterHealth}PV</p>
+                     <p>{this.props.monsterStats.monsterHealth}PV</p>
                  </div>
                 </div>   
             );

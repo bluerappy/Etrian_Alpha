@@ -1,20 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-
-import ReactDOM from 'react-dom';
-
-import { createStore, applyMiddleware } from 'redux';
-import reducers from './reducers';
-
-import CrossPad from './components/CrossPad';
-
-let store = null;
+import MainScreen from './containers/containerMain';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <CrossPad/>
+        <MainScreen/>
       </div>
     );
   }

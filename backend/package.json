@@ -1,6 +1,6 @@
 {
-  "name": "etrian-alpha-backend",
-  "description": "Backend for Dungeon Crawler React Game",
+  "name": "backend",
+  "description": "dungeon crawler backend",
   "version": "0.0.0",
   "homepage": "",
   "main": "src",
@@ -39,7 +39,7 @@
     "feathers-mongoose": "^6.2.0",
     "helmet": "^3.14.0",
     "mongodb-core": "^3.1.7",
-    "mongoose": "^5.3.5",
+    "mongoose": "^5.3.6",
     "serve-favicon": "^2.5.0",
     "winston": "^3.1.0"
   },
