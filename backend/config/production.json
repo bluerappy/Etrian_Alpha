@@ -1,4 +1,4 @@
 {
-  "host": "etrian-alpha-backend-app.feathersjs.com",
+  "host": "backend-app.feathersjs.com",
   "port": "PORT"
 }

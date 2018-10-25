@@ -1,5 +1,8 @@
 import { combineReducers } from 'redux';
+import getMonstersListReducer from './getMonstersList-reducer';
 
-export default combineReducers({
- 
+const rootReducer = combineReducers({
+  monstersList: getMonstersListReducer
 })
+
+export default rootReducer;
