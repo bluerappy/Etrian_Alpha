@@ -10,7 +10,7 @@ const SupportStyle = {
 
 class SupportChara extends Component {
     render() {
-        console.log("swordcount mob",this.props.swordCount)
+        // console.log("swordcount mob",this.props.swordCount)
         if(this.props.swordCount % 2 === 0) {
             return (
                 <div  className="row">

@@ -5,6 +5,7 @@ import LifePotionCount from './lifePotionCount';
 import SupportChara from './SupportChara';
 import MonstersChara from './monstersChara';
 import HealthBar from './healthBar';
+import StageCount from './stageCount';
 
 const divStyle = {
     borderRadius: "8px",
@@ -30,7 +31,7 @@ _onClickLifePotion() {
 }
 
     render() {
-        console.log("screenpanel",this.props.swordCount)
+        // console.log("screenpanel",this.props.swordCount)
         return (
             <Row>
                 <Col xs={"2"}>
@@ -38,13 +39,18 @@ _onClickLifePotion() {
                         <SupportChara swordCount={this.props.swordCount}/>
                         <MonstersChara monsterStats={this.props.monsterStats}/>
                         <HealthBar health={this.props.health}/>
+
                         <div onClick={()=>this._onClickSword()}> 
                            <SwordCount swordCount={this.props.swordCount}/>
                         </div>
                         <div onClick={()=>this._onClickLifePotion()}>
                             <LifePotionCount lifePotionCount={this.props.lifePotionCount}/>
                         </div>
+
                     </div>
+                </Col>
+                <Col>
+                    <StageCount stage={this.props.stage}/>
                 </Col>
             </Row>
             

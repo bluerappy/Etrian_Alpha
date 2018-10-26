@@ -22,7 +22,7 @@ const textStyle = {
 
 class SwordCount extends Component {
     render() {
-        console.log("swordcount",this.props.swordCount)
+        // console.log("swordcount",this.props.swordCount)
         return (
             <div style={swordStyle}>
                 <div >

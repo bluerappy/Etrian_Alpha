@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import slimeImage from '../images/slime.png';
+// import slimeImage from '../images/slime.png';
 import nuclearSlime from '../images/nuclearSlime.png';
 
 const monsterStyle = {
@@ -12,7 +12,7 @@ const monsterStyle = {
 
 class MonstersChara extends Component {
     render() {
-        console.log("MA", this.props.monsterStats)
+        // console.log("MA", this.props.monsterStats)
         if(this.props.monsterStats.monsterAppearance === true) {
             return (
                 <div  className="row">

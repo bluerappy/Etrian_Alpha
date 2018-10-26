@@ -22,7 +22,7 @@ const textStyle = {
 
 class LifePotionCount extends Component {
     render() {
-        console.log("lifePotionCount",this.props.lifePotionCount)
+        // console.log("lifePotionCount",this.props.lifePotionCount)
         return (
             <div style={potionStyle}>
             <div >
