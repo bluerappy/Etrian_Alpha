@@ -21,19 +21,19 @@ const textStyle = {
 }
 
 class SwordCount extends Component {
-    render() {
-        // console.log("swordcount",this.props.swordCount)
-        return (
-            <div style={swordStyle}>
-                <div >
-                    <img src={sword} alt="monster" width="50" height="50" />
-                </div>
-                <div style={textStyle}>
-                    <p>x {this.props.swordCount}</p>
-                </div>
-            </div>
-        );
-    }  
-}
+  render() {
+    // console.log("swordcount",this.props.swordCount)
+    return (
+      <div style={swordStyle}>
+        <div>
+          <img src={sword} alt="monster" width="50" height="50" />
+        </div>
+        <div style={textStyle}>
+          <p>x {this.props.swordCount}</p>
+        </div>
+      </div>
+      );
+    }
+  }
 
 export default SwordCount;

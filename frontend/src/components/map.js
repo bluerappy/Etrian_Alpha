@@ -15,23 +15,20 @@ const mapGrid = [
 ]
 
 class Map extends Component {
-    render() {
-        return(
-            <div>
-                  {mapGrid.map((x, i) => {
-                     return (
-                          <div key={i} style={mapStyle} className="row">
-                          {i}
-                          </div>   
-                          
-                     );
-               }
-        )}
-        
+  render() {
+    return(
+      <div>
+        {mapGrid.map((x, i) => {
+          return (
+            <div key={i} style={mapStyle} className="row">
+              {i}
             </div>
-        )
-      
+            );
+          }
+          )}
+      </div>
+      )
     }
-}
+  }
 
 export default Map;

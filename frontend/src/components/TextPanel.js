@@ -20,19 +20,18 @@ const textStyle = {
   };
 
 class TextPanel extends Component {
-    render() {
-        return (
-            <Row>
-                <Col xs={"2"}>
-                    <div style={textPanel}>
-                        <p className="text" style={textStyle}>{this.props.message}</p>
-                        <p className="text" style={textStyle}>{this.props.message2}</p>
-                    </div>
-                </Col>
-            </Row>
-            
-        );
+  render() {
+    return (
+      <Row>
+        <Col xs={"2"}>
+          <div style={textPanel}>
+            <p className="text" style={textStyle}>{this.props.message}</p>
+            <p className="text" style={textStyle}>{this.props.message2}</p>
+          </div>
+        </Col>
+      </Row>
+      );
     }
-}
+  }
 
 export default TextPanel;

@@ -62,12 +62,12 @@ componentDidMount() {
 
 //algo combat+défaite mobs
 _attaque() {
-    if(this.state.monsterStats.monsterHealth>0) {
-        let monsterStats = {...this.state.monsterStats};
+  if(this.state.monsterStats.monsterHealth>0) {
+    let monsterStats = {...this.state.monsterStats};
         monsterStats.monsterHealth= monsterStats.monsterHealth -1;
         this.setState({
-            message: "Vous lui infligez des dégats !", monsterStats
-          });
+          message: "Vous lui infligez des dégats !", monsterStats
+        });
           if(this.state.monsterStats.monsterHealth<=1) {
             let monsterStats = {...this.state.monsterStats};
             monsterStats.monsterAppearance= false;
@@ -79,8 +79,8 @@ _attaque() {
                 message2 : "Le monstre est détruit !"
               });
             }
+          }
         }
-}
 
 _walk() {
     this.setState({message2 : ""})
@@ -115,25 +115,23 @@ _walk() {
 }
 
     render() {
-        // console.log("test", this.props.monstersList)
-        return (
-            <div>
-                    <ScreenPanel health={this.state.health} lifePotionCount={this.state.lifePotionCount}
-                      swordCount={this.state.swordCount} monsterStats={this.state.monsterStats} stage={this.state.stage} />
-                    <TextPanel message={this.state.message} message2={this.state.message2}/>
-
-                    <ButtonGroup size="sm">
-                        {/* <Button onClick={()=>this._clickLeft()}>degats</Button>
-                        <Button onClick={()=>this._clickAdv()}>potion</Button>
-                        <Button onClick={()=>this._clickRight()}>give potion</Button> */}
-                        <Button color="danger" disabled={this.state.monsterStats.monsterAppearance=== false} onClick={()=>this._attaque()}>Attaque</Button>
-                        <Button color="primary" disabled={this.state.monsterStats.monsterAppearance=== true} onClick={()=>this._walk()}>Walk</Button>
-                    </ButtonGroup>
-                    <Map/>
-                       
-            </div>
+      // console.log("test", this.props.monstersList)
+      return (
+        <div>
+          <ScreenPanel health={this.state.health} lifePotionCount={this.state.lifePotionCount}
+            swordCount={this.state.swordCount} monsterStats={this.state.monsterStats} stage={this.state.stage} />
+            <TextPanel message={this.state.message} message2={this.state.message2}/>
+              <ButtonGroup size="sm">
+                {/* <Button onClick={()=>this._clickLeft()}>degats</Button>
+                    <Button onClick={()=>this._clickAdv()}>potion</Button>
+                    <Button onClick={()=>this._clickRight()}>give potion</Button> */}
+                    <Button color="danger" disabled={this.state.monsterStats.monsterAppearance=== false} onClick={()=>this._attaque()}>Attaque</Button>
+                    <Button color="primary" disabled={this.state.monsterStats.monsterAppearance=== true} onClick={()=>this._walk()}>Walk</Button>
+              </ButtonGroup>
+              <Map/>         
+        </div>
         );
+      }
     }
-}
 
 export default MainScreen;

@@ -24,16 +24,16 @@ class LifePotionCount extends Component {
     render() {
         // console.log("lifePotionCount",this.props.lifePotionCount)
         return (
-            <div style={potionStyle}>
+          <div style={potionStyle}>
             <div >
-                <img src={potion} alt="monster" width="50" height="50" />
+              <img src={potion} alt="monster" width="50" height="50" />
             </div>
             <div style={textStyle}>
-                <p>x {this.props.lifePotionCount}</p>
+              <p>x {this.props.lifePotionCount}</p>
             </div>
         </div>
-        );
-    }
+    );
+  }
 }
 
 export default LifePotionCount;
