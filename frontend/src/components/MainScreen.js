@@ -32,6 +32,7 @@ componentDidMount() {
       this.setState({stepsForNextStage : this.state.stage + Math.floor(Math.random() * 10) + 1},
        () => {console.log("stepsfornext", this.state.stepsForNextStage)})
     }
+    this.props.addMonster();
 } 
 
 // _clickLeft() {

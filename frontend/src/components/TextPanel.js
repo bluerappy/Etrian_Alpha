@@ -8,6 +8,7 @@ const textPanel = {
     border:" 4px solid #eaebea",
     width: "960px",
     height: "50px",
+    fontFamily:  'Press Start 2P',
   };
 
 const textStyle = {
