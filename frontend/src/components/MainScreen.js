@@ -20,7 +20,7 @@ class MainScreen extends Component {
           stepsForNextStage : 0,
           monsterStats : { 
             monsterAppearance: false,
-            monsterHealth: 4,
+            monsterHealth: 1,
             attack : 1},
         };
         this.monsterBaseStats = this.state.monsterStats;
@@ -32,7 +32,6 @@ componentDidMount() {
       this.setState({stepsForNextStage : this.state.stage + Math.floor(Math.random() * 10) + 1},
        () => {console.log("stepsfornext", this.state.stepsForNextStage)})
     }
-    this.props.addMonster();
 } 
 
 // _clickLeft() {
@@ -85,27 +84,32 @@ _attaque() {
 
 _walk() {
     this.setState({message2 : ""})
-    const encounter = Math.floor(Math.random() * Math.floor(4));
+    const actualStage = this.state.stage;
+    const encounter = 1;
     const stepscount = Math.floor(Math.random() * Math.floor(4));
     const test= this.state.stepsDone;
-    if (stepscount >0) {
+   
+    if (stepscount > 0) {
         this.setState({ steps : stepscount}, ()=> {
             this.setState({ message : 'Vous avez avancé de ' + this.state.steps + ' pas.' , stepsDone :  (test+stepscount)},
             ()=> {
               if (this.state.stepsDone >= this.state.stepsForNextStage) {
                 console.log("STAGE DONE !!!!!!!!!!!!!!!!!!!!!!!!!")
                 this.setState({stage : this.state.stage +1, stepsDone : 0, stepsForNextStage : this.state.stage + Math.floor(Math.random() * 10) + 1})
-                console.log("gefz", this.state.stepsForNextStage)
+                console.log("for next", this.state.stepsForNextStage)
               }
               console.log("STEPSDONE", this.state.stepsDone)
             })
         })
     }
-    else  this.setState({ steps : stepscount}, ()=> {
+    else this.setState({ steps : stepscount}, ()=> {
         this.setState({ message : `Vous n'avancez guère.....`})
+        console.log("NO STEPS")
     })
     //
-    if (encounter === 1) {
+     
+    if (encounter === 1 && actualStage===this.state.stage) {
+      console.log(this.state.stage, actualStage)
        this.setState( prevState => ({
         monsterStats: {
             ...prevState.monsterStats,
