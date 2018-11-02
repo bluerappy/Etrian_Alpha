@@ -18,28 +18,28 @@ function* getMonstersListWorkerSaga() {
 }
 
 //add monsters worker
-function* addMonsters() {
+function* addMonsters(monster) {
   try {
     console.log("add monsters worker")
-    const response = yield call(addMonstersFunction);
+    const response = yield call(addMonstersFunction, monster.payload);
     console.log("add response", response)
     yield put({ type: "ADD_MONSTERS_SUCCESS", payload: response });
   } catch (error) {
     yield put({ type: "ADD_MONSTERS_FAILURE", payload: error });
   }
 }
-
+//CRUD FUNCTIONS//
 function getMonstersFunction() {
   console.log("monster find function")
     return app.service('monsters').find()
 }
 
-function addMonstersFunction() {
-  console.log("add monsters function")
+function addMonstersFunction(monster) {
+  console.log("add monsters function", monster)
   return app.service('monsters').create({
-    name : "Ice Slime",
-    type : "chimical",
-    healthPoints : 2,
-    power : 3
+    name : monster.name,
+    type : monster.type,
+    healthPoints : monster.healthPoints,
+    power : monster.power
   })
 }

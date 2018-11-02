@@ -4,19 +4,9 @@ export function getMonstersList() {
   };
 }
 
-//WITH FLOW
-// export const addMonster = ( monsters: Object ) => ({
-//   type: ADD_MONSTERS,
-//   payload: {
-//     monsters
-//   }
-// });
-
-export const addMonster = (monsters) => ({
+export const addMonster = (monster) => ({
   type: ADD_MONSTERS,
-  payload: {
-    monsters
-  }
+  payload: monster
 });
 
 export const GETMONSTERS_REQUEST  = 'GETMONSTERS_REQUEST';
