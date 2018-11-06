@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 // import slimeImage from '../images/slime.png';
-import nuclearSlime from '../images/nuclearSlime.png';
+import nuclearSlime from '../../images/nuclearSlime.png';
 
 const monsterStyle = {
     position: "absolute",

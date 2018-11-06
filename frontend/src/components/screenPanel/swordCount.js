@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import sword from '../images/sword.png';
+import sword from '../../images/sword.png';
 
 const swordStyle = {
     padding: "1px",

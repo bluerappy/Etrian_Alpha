@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import slimeImage from '../images/slime.png';
-import cristalSlimeImage from '../images/cristalSlime.png';
+import slimeImage from '../../images/slime.png';
+import cristalSlimeImage from '../../images/cristalSlime.png';
 
 const SupportStyle = {
     position: "relative",

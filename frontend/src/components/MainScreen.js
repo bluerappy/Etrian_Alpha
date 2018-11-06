@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Button, ButtonGroup } from 'reactstrap';
-import TextPanel from './TextPanel';
-import ScreenPanel from './ScreenPanel';
+import TextPanel from './textPanel/TextPanel';
+import ScreenPanel from './screenPanel/ScreenPanel';
 import Map from "./map"
 
 class MainScreen extends Component {

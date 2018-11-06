@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 // import { Row, Col } from 'reactstrap';
-import heartImage from '../images/heart.png';
+import heartImage from '../../images/heart.png';
 
 const heartStyle = {
         position: "relative",

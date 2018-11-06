@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import potion from '../images/potion.png'
+import potion from '../../images/potion.png'
 
 const potionStyle = {
     padding: "1px",
