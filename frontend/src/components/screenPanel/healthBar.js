@@ -10,7 +10,7 @@ const heartStyle = {
 
 class HealthBar extends Component {
   render() {
-    //console.log("health",this.props.health)
+    console.log("health",this.props.health)
     const health = this.props.health;
     return (
       <div>

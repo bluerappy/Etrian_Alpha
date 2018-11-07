@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import { Button, FormGroup, Label, Input, FormText} from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 class monstersAddForm extends Component {
   state = {
-    name : "",
-    type : "",
-    healthPoints : "",
-    power : ""
+    name : null,
+    type : null,
+    healthPoints : null,
+    power : null,
+    image : null
   };
 
   handleChange = (event) => {
@@ -18,7 +19,7 @@ class monstersAddForm extends Component {
   }
   
   render() {
-    const { name, healthPoints, power } = this.state;
+    const { name, healthPoints, power, image } = this.state;
     const isValid = name && healthPoints && power;
     return (
       <div>
@@ -37,6 +38,20 @@ class monstersAddForm extends Component {
         <FormGroup>
           <Label>Power</Label>
             <Input type="number" name="power" placeholder="ex : 2" onChange={this.handleChange} valid={power ? true : false} />
+        </FormGroup>
+        {/* <FormGroup>
+        <Label>Art Image</Label>
+            <Input type="text" name="image" placeholder="URL" onChange={this.handleChange} valid={image ? true : false} />
+        </FormGroup> */}
+        <FormGroup>
+          <Label>Image</Label>
+            <Input type="select" name="image" onChange={this.handleChange} multiple valid={image ? true : false}>
+              <option value="http://image.noelshack.com/fichiers/2018/45/3/1541587423-slime.png" >Basic Slime</option>
+              <option value="http://image.noelshack.com/fichiers/2018/45/3/1541597428-cristalslime.png" >Cristal Slime</option>
+              <option value="http://image.noelshack.com/fichiers/2018/45/3/1541598143-saberslime.png" >Saber Slime</option>
+              <option value="http://image.noelshack.com/fichiers/2018/45/3/1541598143-boomslime.png" >Boom Slime</option>
+              <option value="http://image.noelshack.com/fichiers/2018/45/3/1541598143-feralslime.png" >Feral Slime</option>
+            </Input>
         </FormGroup>
         <FormGroup>
           {!isValid ? <FormText color="danger">

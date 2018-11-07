@@ -40,6 +40,7 @@ function addMonstersFunction(monster) {
     name : monster.name,
     type : monster.type,
     healthPoints : monster.healthPoints,
-    power : monster.power
+    power : monster.power,
+    image : monster.image
   })
 }

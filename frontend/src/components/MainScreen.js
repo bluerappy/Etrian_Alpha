@@ -20,14 +20,17 @@ class MainScreen extends Component {
           stepsForNextStage : 0,
           monsterStats : { 
             monsterAppearance: false,
+            monsterName : "Slime",
             monsterHealth: 1,
-            attack : 1},
+            monsterAttack : 1,
+            monsterImage : ""},
         };
         this.monsterBaseStats = this.state.monsterStats;
       }
 
 componentDidMount() {
     this.props.getMonstersList();
+
     if (this.state.stepsForNextStage <=0) {
       this.setState({stepsForNextStage : this.state.stage + Math.floor(Math.random() * 10) + 1},
        () => {console.log("stepsfornext", this.state.stepsForNextStage)})
@@ -60,8 +63,9 @@ componentDidMount() {
 //       });
 // }
 
-//algo combat+défaite mobs
+//------------------------FIGHT FORMULA------------------------//
 _attaque() {
+  console.log(this.props.monstersList)
   if(this.state.monsterStats.monsterHealth>0) {
     let monsterStats = {...this.state.monsterStats};
         monsterStats.monsterHealth= monsterStats.monsterHealth -1;
@@ -82,6 +86,7 @@ _attaque() {
           }
         }
 
+//------------------------WALK FORMULA------------------------//
 _walk() {
     this.setState({message2 : ""})
     const actualStage = this.state.stage;
@@ -106,14 +111,19 @@ _walk() {
         this.setState({ message : `Vous n'avancez guère.....`})
         console.log("NO STEPS")
     })
-    //
-     
-    if (encounter === 1 && actualStage===this.state.stage) {
-      console.log(this.state.stage, actualStage)
+
+    //----------------------------WALK FORMULA { ENCOUNTER CASE }---------------------------// 
+    if (encounter === 1 && actualStage === this.state.stage) {
+      const randomPick = Math.floor(Math.random() * Math.floor(this.props.monstersList.data.length));
        this.setState( prevState => ({
         monsterStats: {
             ...prevState.monsterStats,
-            monsterAppearance: true}
+            monsterAppearance: true,
+            monsterName : this.props.monstersList.data[randomPick].name,
+            monsterHealth : this.props.monstersList.data[randomPick].healthPoints,
+            monsterAttack : this.props.monstersList.data[randomPick].power,
+            monsterImage : this.props.monstersList.data[randomPick].image
+          }
        }) , this.setState({ message2 : 'Un monstre est apparu !'})
        )
     }
@@ -125,15 +135,15 @@ _walk() {
         <div>
           <ScreenPanel health={this.state.health} lifePotionCount={this.state.lifePotionCount}
             swordCount={this.state.swordCount} monsterStats={this.state.monsterStats} stage={this.state.stage} />
-            <TextPanel message={this.state.message} message2={this.state.message2}/>
-              <ButtonGroup size="sm">
-                {/* <Button onClick={()=>this._clickLeft()}>degats</Button>
-                    <Button onClick={()=>this._clickAdv()}>potion</Button>
-                    <Button onClick={()=>this._clickRight()}>give potion</Button> */}
-                    <Button color="danger" disabled={this.state.monsterStats.monsterAppearance=== false} onClick={()=>this._attaque()}>Attaque</Button>
-                    <Button color="primary" disabled={this.state.monsterStats.monsterAppearance=== true} onClick={()=>this._walk()}>Walk</Button>
-              </ButtonGroup>
-              <Map/>         
+          <TextPanel message={this.state.message} message2={this.state.message2}/>
+          <ButtonGroup size="sm">
+            {/* <Button onClick={()=>this._clickLeft()}>degats</Button>
+                <Button onClick={()=>this._clickAdv()}>potion</Button>
+                <Button onClick={()=>this._clickRight()}>give potion</Button> */}
+                <Button color="danger" disabled={this.state.monsterStats.monsterAppearance=== false} onClick={()=>this._attaque()}>Attaque</Button>
+                <Button color="primary" disabled={this.state.monsterStats.monsterAppearance=== true} onClick={()=>this._walk()}>Walk</Button>
+          </ButtonGroup>
+              {/* <Map/>          */}
         </div>
         );
       }

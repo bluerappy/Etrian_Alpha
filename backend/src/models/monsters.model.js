@@ -10,6 +10,8 @@ module.exports = function (app) {
     type: { type: String, required: false, default: "none" },
     healthPoints: { type: Number, required: true },
     power: { type: Number, required: true },
+    image: { type: String, required: false,
+       default: "http://image.noelshack.com/fichiers/2018/45/3/1541587423-slime.png"}
   }, {
     timestamps: true
   });

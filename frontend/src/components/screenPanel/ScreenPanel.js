@@ -34,6 +34,7 @@ _onClickLifePotion() {
           <Row>
             <Col xs={"2"}>
               <div style={divStyle}>
+              <StageCount stage={this.props.stage}/>
                 <SupportChara swordCount={this.props.swordCount}/>
                 <MonstersChara monsterStats={this.props.monsterStats}/>
                 <HealthBar health={this.props.health}/>
@@ -44,10 +45,8 @@ _onClickLifePotion() {
                     <LifePotionCount lifePotionCount={this.props.lifePotionCount}/>
                   </div>
               </div>
-              </Col>
-              <Col>
-                <StageCount stage={this.props.stage}/>
-              </Col>
+            </Col>
+             
           </Row>  
         );
     }
