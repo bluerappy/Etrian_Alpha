@@ -63,6 +63,7 @@ class monstersAddForm extends Component {
                     }
         </FormGroup>
           <Button color={!isValid ? "danger" : "primary"} disabled={!isValid} onClick={this.addMonster}>Validate</Button>{' '}
+          <Button color="secondary" onClick={this.props.parentToggle}>Cancel</Button>
       </div>
       )}
     }

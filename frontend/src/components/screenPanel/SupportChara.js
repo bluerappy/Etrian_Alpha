@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import slimeImage from '../../images/slime.png';
-import cristalSlimeImage from '../../images/cristalSlime.png';
+// import slimeImage from '../../images/slime.png';
+// import cristalSlimeImage from '../../images/cristalSlime.png';
 
-const SupportStyle = {
-    position: "relative",
-    top : "425px",
-    left : "10px"
-  };
+// const SupportStyle = {
+//     position: "relative",
+//     top : "425px",
+//     left : "10px"
+//   };
 
 class SupportChara extends Component {
     render() {

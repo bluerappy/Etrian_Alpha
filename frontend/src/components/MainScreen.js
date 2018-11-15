@@ -2,40 +2,49 @@ import React, {Component} from 'react';
 import { Button, ButtonGroup } from 'reactstrap';
 import TextPanel from './textPanel/TextPanel';
 import ScreenPanel from './screenPanel/ScreenPanel';
-import Map from "./map"
+// import Map from "./map"
 
 class MainScreen extends Component {
     constructor() {
         super();
         this.state = {
           stage: 1,
+          gameOver: false,
           click: true,
           message: '',
           message2: '',
           swordCount: 0,
           lifePotionCount : 5,
-          health: [1,1,1],
+          health: [1,1,1,1,1,1,1,1],
           steps : 0,
           stepsDone : 0,
           stepsForNextStage : 0,
           monsterStats : { 
             monsterAppearance: false,
-            monsterName : "Slime",
-            monsterHealth: 1,
-            monsterAttack : 1,
+            monsterName : "",
+            monsterHealth: "",
+            monsterAttack : "",
             monsterImage : ""},
         };
-        this.monsterBaseStats = this.state.monsterStats;
       }
 
+//--------- SETUP NECESSARIES STEPS ----------//
 componentDidMount() {
     this.props.getMonstersList();
-
     if (this.state.stepsForNextStage <=0) {
-      this.setState({stepsForNextStage : this.state.stage + Math.floor(Math.random() * 10) + 1},
-       () => {console.log("stepsfornext", this.state.stepsForNextStage)})
+      this.setState({stepsForNextStage : this.state.stage + Math.floor(Math.random() * 15) + 1})
     }
 } 
+
+//------------- GAME OVER CONDITION ---------------//
+static getDerivedStateFromProps(nextState, prevState) {
+  if (prevState.health.length === 0) {
+    return { gameOver : true,  
+             message: "Vous avez succombé",
+             message2: "GAME OVER" }
+  }
+  return null;
+}
 
 // _clickLeft() {
 //     let newSwordCount = this.state.swordCount+1;
@@ -64,11 +73,19 @@ componentDidMount() {
 // }
 
 //------------------------FIGHT FORMULA------------------------//
-_attaque() {
-  console.log(this.props.monstersList)
-  if(this.state.monsterStats.monsterHealth>0) {
+_attaque = () => {
+  console.log(this.state.monsterStats.monsterAttack)
+  const actualHealth = this.state.health;
+  const monsterAttack = Math.floor(Math.random() * Math.floor(3));
+  const monsterDamage = Math.floor(Math.random() * Math.floor(this.state.monsterStats.monsterAttack)+1);
+   if (monsterAttack === 1) {
+    const newhealth = actualHealth.splice(monsterDamage)
+    this.setState({health: newhealth, message2: "Le monstre vous blesse !"});
+  }
+  
+  if(this.state.monsterStats.monsterHealth>0 && actualHealth.length>0) {
     let monsterStats = {...this.state.monsterStats};
-        monsterStats.monsterHealth= monsterStats.monsterHealth -1;
+        monsterStats.monsterHealth = monsterStats.monsterHealth -1;
         this.setState({
           message: "Vous lui infligez des dégats !", monsterStats
         });
@@ -79,7 +96,6 @@ _attaque() {
                 message: "Victoire", monsterStats
               });
               this.setState({
-                monsterStats: this.monsterBaseStats,
                 message2 : "Le monstre est détruit !"
               });
             }
@@ -88,9 +104,12 @@ _attaque() {
 
 //------------------------WALK FORMULA------------------------//
 _walk() {
+
+  if (this.state.health.length>0) {
+
     this.setState({message2 : ""})
     const actualStage = this.state.stage;
-    const encounter = 1;
+    const encounter = Math.floor(Math.random() * Math.floor(4));;
     const stepscount = Math.floor(Math.random() * Math.floor(4));
     const test= this.state.stepsDone;
    
@@ -99,17 +118,15 @@ _walk() {
             this.setState({ message : 'Vous avez avancé de ' + this.state.steps + ' pas.' , stepsDone :  (test+stepscount)},
             ()=> {
               if (this.state.stepsDone >= this.state.stepsForNextStage) {
-                console.log("STAGE DONE !!!!!!!!!!!!!!!!!!!!!!!!!")
-                this.setState({stage : this.state.stage +1, stepsDone : 0, stepsForNextStage : this.state.stage + Math.floor(Math.random() * 10) + 1})
-                console.log("for next", this.state.stepsForNextStage)
+                this.setState({ stage : this.state.stage +1, 
+                                stepsDone : 0, 
+                                stepsForNextStage : this.state.stage + Math.floor(Math.random() * 10) + 1})
               }
-              console.log("STEPSDONE", this.state.stepsDone)
             })
         })
     }
     else this.setState({ steps : stepscount}, ()=> {
         this.setState({ message : `Vous n'avancez guère.....`})
-        console.log("NO STEPS")
     })
 
     //----------------------------WALK FORMULA { ENCOUNTER CASE }---------------------------// 
@@ -127,6 +144,8 @@ _walk() {
        }) , this.setState({ message2 : 'Un monstre est apparu !'})
        )
     }
+
+  }
 }
 
     render() {
@@ -134,7 +153,8 @@ _walk() {
       return (
         <div>
           <ScreenPanel health={this.state.health} lifePotionCount={this.state.lifePotionCount}
-            swordCount={this.state.swordCount} monsterStats={this.state.monsterStats} stage={this.state.stage} />
+            swordCount={this.state.swordCount} monsterStats={this.state.monsterStats}
+             stepsDone={this.state.stepsDone} stepsForNextStage={this.state.stepsForNextStage} stage={this.state.stage} gameOver={this.state.gameOver}/>
           <TextPanel message={this.state.message} message2={this.state.message2}/>
           <ButtonGroup size="sm">
             {/* <Button onClick={()=>this._clickLeft()}>degats</Button>

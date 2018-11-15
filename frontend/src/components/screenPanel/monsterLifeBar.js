@@ -6,8 +6,7 @@ class MonsterLifeBar extends Component {
     super();
     this.state = {
       monsterHealth : null,
-    },
-    this.monsterBaseStats = this.state.monsterStats;
+    };
   }
 
   componentDidMount(){
@@ -18,7 +17,6 @@ class MonsterLifeBar extends Component {
     let fullLife = this.props.monsterHealth;
     let remainingLife = this.state.monsterHealth;
     const newLife = Math.floor(( fullLife/ remainingLife ) * 100);
-    console.log(newLife)
     if (newLife <= 20) {
       return (
         <Progress color="danger" value={newLife}>{this.props.monsterHealth}</Progress>
@@ -31,7 +29,7 @@ class MonsterLifeBar extends Component {
       return (
         <Progress color="success" value={newLife}>{this.props.monsterHealth}</Progress>
       )
-    }else if (newLife <=100) {
+    } else if (newLife <=100) {
       return (
         <Progress value={newLife}>{this.props.monsterHealth}</Progress>
       )

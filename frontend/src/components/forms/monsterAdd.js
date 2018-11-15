@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import MonsterAddForm from './monstersAddForm';
 
 class MonsterAdd extends React.Component {
   constructor(props) {
@@ -17,19 +18,26 @@ class MonsterAdd extends React.Component {
     });
   }
 
+  handleChange = (event) => {
+    this.setState({[event.target.name]: event.target.value});
+  };
+
+  addMonster = (monster) => {
+    this.props.addMonster(monster);
+    this.setState((prevState) => ({
+      modal: !prevState.modal,
+    }));
+  }
+
   render() {
     return (
       <div>
-        <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button>
+        <Button color="danger" onClick={this.toggle}>ADD NEW MONSTER</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Add New Monster</ModalHeader>
           <ModalBody>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <MonsterAddForm parentToggle={this.toggle} addMonster={this.addMonster}/>
           </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-          </ModalFooter>
         </Modal>
       </div>
     );

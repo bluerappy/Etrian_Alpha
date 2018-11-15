@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-// import slimeImage from '../images/slime.png';
-import nuclearSlime from '../../images/nuclearSlime.png';
 import MonsterLifeBar from './monsterLifeBar'
+import Death from '../../images/death.png'
 
 const monsterStyle = {
     position: "absolute",
-    left : "450px",
+    left : "430px",
     top : "120px",
     textAlign: "center",
     color: "white"
@@ -13,7 +12,18 @@ const monsterStyle = {
 
 class MonstersChara extends Component {
     render() {
-        console.log("image", this.props.monsterStats.monsterImage)
+      // console.log("game over", this.props.gameOver)
+      //   console.log("image", this.props.monsterStats.monsterImage)
+        if (this.props.gameOver === true) {
+          return (
+            <div className="row">
+             <div style={monsterStyle}>
+                <img src={Death} alt="monster" width="250" height="250" />
+                 <p>+ GAME OVER +</p>
+            </div>
+            </div>   
+          );
+        }
         if(this.props.monsterStats.monsterAppearance === true) {
           return (
             <div className="row">
@@ -27,10 +37,10 @@ class MonstersChara extends Component {
               </div>
             </div>   
           );
-        }
+        }  
         else return (
-          <div className="row"></div>   
-        );
+          <div className="row"></div>    
+        );   
     }
 }
 

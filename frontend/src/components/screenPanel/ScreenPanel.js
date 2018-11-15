@@ -34,9 +34,9 @@ _onClickLifePotion() {
           <Row>
             <Col xs={"2"}>
               <div style={divStyle}>
-              <StageCount stage={this.props.stage}/>
+              <StageCount stage={this.props.stage} stepsForNextStage={this.props.stepsForNextStage} stepsDone={this.props.stepsDone}/>
                 <SupportChara swordCount={this.props.swordCount}/>
-                <MonstersChara monsterStats={this.props.monsterStats}/>
+                <MonstersChara monsterStats={this.props.monsterStats} gameOver={this.props.gameOver}/>
                 <HealthBar health={this.props.health}/>
                   <div onClick={()=>this._onClickSword()}> 
                     <SwordCount swordCount={this.props.swordCount}/>

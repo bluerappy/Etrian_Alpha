@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import StepsCount from './stepsCount';
 
 const stageStyle = {
   position: "absolute",
@@ -19,6 +20,7 @@ class StageCount extends Component {
         return (
           <div style={stageStyle}>
             <p>STAGE {this.props.stage} </p>
+            <StepsCount stepsForNextStage={this.props.stepsForNextStage} stepsDone={this.props.stepsDone}/>
           </div>
         );
     }
