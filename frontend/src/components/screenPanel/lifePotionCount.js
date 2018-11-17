@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import potion from '../images/potion.png'
+import potion from '../../images/potion.png'
 
 const potionStyle = {
     padding: "1px",
     borderRadius: "8px",
     border:" 4px solid #eaebea",
-    width: "50px",
-    height: "50px",
+    width: "60px",
+    height: "60px",
     backgroundColor : "rgba(255, 255, 255, 0.8)",
     position : "absolute",
     top : "105px",

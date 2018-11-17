@@ -2,7 +2,7 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import app from '../config/app-Feathers';
 
 export default function* getMonstersListWatcherSaga() {
-  console.log("monster watcher")
+  // console.log("monster watcher")
     yield takeLatest("GETMONSTERS_REQUEST" , getMonstersListWorkerSaga);
     yield takeLatest("ADD_MONSTERS" , addMonsters);
   }
@@ -20,9 +20,9 @@ function* getMonstersListWorkerSaga() {
 //add monsters worker
 function* addMonsters(monster) {
   try {
-    console.log("add monsters worker")
+    // console.log("add monsters worker")
     const response = yield call(addMonstersFunction, monster.payload);
-    console.log("add response", response)
+    // console.log("add response", response)
     yield put({ type: "ADD_MONSTERS_SUCCESS", payload: response });
   } catch (error) {
     yield put({ type: "ADD_MONSTERS_FAILURE", payload: error });
@@ -30,7 +30,7 @@ function* addMonsters(monster) {
 }
 //CRUD FUNCTIONS//
 function getMonstersFunction() {
-  console.log("monster find function")
+  // console.log("monster find function")
     return app.service('monsters').find()
 }
 
@@ -40,6 +40,7 @@ function addMonstersFunction(monster) {
     name : monster.name,
     type : monster.type,
     healthPoints : monster.healthPoints,
-    power : monster.power
+    power : monster.power,
+    image : monster.image
   })
 }

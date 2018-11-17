@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
 import MainScreen from './containers/containerMain';
-import MonsterAddForm from './containers/forms/containerMonsterAddForm';
+import MonsterAdd from './containers/forms/containerMonsterAdd';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <MainScreen/>
-        <MonsterAddForm/>
+        <MonsterAdd/>
       </div>
     );
   }

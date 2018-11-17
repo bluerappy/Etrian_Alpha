@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import { Row, Col } from 'reactstrap';
 
 const textPanel = {
-    padding: "80px",
+    padding: "120px",
     background: "linear-gradient(to bottom, #6c6eb2 0%,#181870 64%,#000028 100%)",
     borderRadius: "8px",
     border:" 4px solid #eaebea",
-    width: "960px",
-    height: "50px",
+    width: "1080px",
+    height: "100px",
     fontFamily:  'Press Start 2P',
   };
 

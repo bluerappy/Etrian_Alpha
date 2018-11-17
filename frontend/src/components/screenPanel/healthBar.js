@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
 // import { Row, Col } from 'reactstrap';
-import heartImage from '../images/heart.png';
+import heartImage from '../../images/heart.png';
 
 const heartStyle = {
         position: "relative",
-        left : "1020px",
-        bottom: "230px"
+        left : "1000px",
+        bottom: "10"
   };
 
 class HealthBar extends Component {
   render() {
-    //console.log("health",this.props.health)
     const health = this.props.health;
     return (
       <div>

@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import sword from '../images/sword.png';
+import sword from '../../images/sword.png';
 
 const swordStyle = {
     padding: "1px",
     borderRadius: "8px",
     border:" 4px solid #eaebea",
-    width: "50px",
-    height: "50px",
+    width: "60px",
+    height: "60px",
     backgroundColor : "rgba(255, 255, 255, 0.8)",
     position : "absolute",
     top : "25px",
