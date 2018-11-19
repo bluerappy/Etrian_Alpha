@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 class monstersAddForm extends Component {
   state = {

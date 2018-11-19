@@ -16,6 +16,7 @@ class MainScreen extends Component {
           swordCount: 0,
           lifePotionCount : 5,
           health: [1,1,1,1,1,1,1,1],
+          status: "Healthy",
           steps : 0,
           stepsDone : 0,
           stepsForNextStage : 0,
@@ -40,20 +41,21 @@ componentDidMount() {
 static getDerivedStateFromProps(nextState, prevState) {
   if (prevState.health.length === 0) {
     return { gameOver : true,  
-             message: "Vous avez succombé",
+             message: 'Vous avez succombé.....',
              message2: "GAME OVER" }
   }
   return null;
 }
 
-// _clickLeft() {
-//     let newSwordCount = this.state.swordCount+1;
-//     let healthDamage = this.state.health;
-//     healthDamage.pop();
-//     this.setState({
-//         message: "Now, attack !", swordCount: newSwordCount, health: healthDamage
-//       });
-// }
+_changeStatus() {
+  if (this.state.status === "Poison") {
+    this.setState({ status : "Healthy"});
+  }
+  if (this.state.status === "Healthy") {
+    this.setState({ status : "Poison"});
+  }
+    
+}
 // _clickAdv() {
 //     let newHealth = this.state.health;
 //     let newLifePotionCount = this.state.lifePotionCount-1
@@ -65,22 +67,31 @@ static getDerivedStateFromProps(nextState, prevState) {
 //     } 
 // }
 
-// _clickRight() {
-//     let newPotion = this.state.potion+1
-//     this.setState({
-//         message: "Go Right?", potion: newPotion
-//       });
-// }
+_drinkPotion() {
+  if (this.state.health.length === 9) {
+    this.setState({ message: "Votre vie est déjà à son maximum", message2: "" });
+  }
+  else if (this.state.health.length < 9) {
+    let actualPotionCount = this.state.lifePotionCount;
+    let actualHealth = this.state.health;
+    const randomIndex = Math.floor(Math.random() * Math.floor(actualHealth.length+1));
+    console.log("random",randomIndex)
+    actualHealth.splice(randomIndex ,0,1)
+    this.setState({
+        message: "Vous utilisez une potion de soin !", message2: "", health: actualHealth
+      });
+      console.log(actualHealth)
+  }
+}
 
 //------------------------FIGHT FORMULA------------------------//
 _attaque = () => {
-  console.log(this.state.monsterStats.monsterAttack)
   const actualHealth = this.state.health;
   const monsterAttack = Math.floor(Math.random() * Math.floor(3));
-  const monsterDamage = Math.floor(Math.random() * Math.floor(this.state.monsterStats.monsterAttack)+1);
-   if (monsterAttack === 1) {
-    const newhealth = actualHealth.splice(monsterDamage)
-    this.setState({health: newhealth, message2: "Le monstre vous blesse !"});
+  const monsterDamage = Math.floor(Math.random() * Math.floor(this.state.monsterStats.monsterAttack+1));
+   if (monsterAttack === 1 && monsterDamage > 0 && this.state.gameOver === false) {
+    actualHealth.splice(0, monsterDamage)
+    this.setState({health: actualHealth, message2: 'Le monstre vous inflige ' + monsterDamage + ' dégat(s) !'});
   }
   
   if(this.state.monsterStats.monsterHealth>0 && actualHealth.length>0) {
@@ -104,8 +115,16 @@ _attaque = () => {
 
 //------------------------WALK FORMULA------------------------//
 _walk() {
-
+  const poisonDamage = Math.floor(Math.random() * Math.floor(2));
   if (this.state.health.length>0) {
+    //-------------POISON CASE--------------------------//
+    if (this.state.status === "Poison" && poisonDamage === 1) {
+      const actualHealth = this.state.health;
+      const randomIndex = Math.floor(Math.random() * Math.floor(actualHealth.length+1));
+      actualHealth.splice(randomIndex, 1);
+      this.setState({health : actualHealth});
+
+    }
 
     this.setState({message2 : ""})
     const actualStage = this.state.stage;
@@ -152,14 +171,14 @@ _walk() {
       // console.log("test", this.props.monstersList)
       return (
         <div>
-          <ScreenPanel health={this.state.health} lifePotionCount={this.state.lifePotionCount}
+          <ScreenPanel status={this.state.status} health={this.state.health} lifePotionCount={this.state.lifePotionCount}
             swordCount={this.state.swordCount} monsterStats={this.state.monsterStats}
              stepsDone={this.state.stepsDone} stepsForNextStage={this.state.stepsForNextStage} stage={this.state.stage} gameOver={this.state.gameOver}/>
           <TextPanel message={this.state.message} message2={this.state.message2}/>
           <ButtonGroup size="sm">
-            {/* <Button onClick={()=>this._clickLeft()}>degats</Button>
-                <Button onClick={()=>this._clickAdv()}>potion</Button>
-                <Button onClick={()=>this._clickRight()}>give potion</Button> */}
+                {/* <Button onClick={()=>this._clickLeft()}>degats</Button> */}
+                <Button onClick={()=>this._changeStatus()}>CHANGE STATUS TEST</Button>
+                <Button onClick={()=>this._drinkPotion()}>Potion</Button>
                 <Button color="danger" disabled={this.state.monsterStats.monsterAppearance=== false} onClick={()=>this._attaque()}>Attaque</Button>
                 <Button color="primary" disabled={this.state.monsterStats.monsterAppearance=== true} onClick={()=>this._walk()}>Walk</Button>
           </ButtonGroup>
