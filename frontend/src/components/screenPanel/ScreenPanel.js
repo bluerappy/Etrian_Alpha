@@ -6,6 +6,7 @@ import SupportChara from './SupportChara';
 import MonstersChara from './monstersChara';
 import HealthBar from './healthBar';
 import StageCount from './stageCount';
+import StatusIcon from './statusIcon';
 
 const divStyle = {
     borderRadius: "8px",
@@ -37,7 +38,11 @@ _onClickLifePotion() {
               <StageCount stage={this.props.stage} stepsForNextStage={this.props.stepsForNextStage} stepsDone={this.props.stepsDone}/>
                 <SupportChara swordCount={this.props.swordCount}/>
                 <MonstersChara monsterStats={this.props.monsterStats} gameOver={this.props.gameOver}/>
+                <div>
                 <HealthBar health={this.props.health}/>
+                <StatusIcon status={this.props.status}/>
+                </div>
+              
                   <div onClick={()=>this._onClickSword()}> 
                     <SwordCount swordCount={this.props.swordCount}/>
                   </div>
