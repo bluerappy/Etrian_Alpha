@@ -5,7 +5,7 @@ import poisonIcon from '../../images/poison.png';
 const iconStyle = {
         position: "absolute",
         left : "950px",
-        bottom: "420px"
+        bottom: "430px"
   };
 
 class StatusIcon extends Component {
@@ -13,7 +13,7 @@ class StatusIcon extends Component {
     if (this.props.status === 'Poison') {
       return (
         <div style={iconStyle}>
-        <img src={poisonIcon} alt="Poison" width="50" height="50" />
+        <img src={poisonIcon} alt="Poison" width="40" height="40" />
        </div>
       )
     }

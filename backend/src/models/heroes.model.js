@@ -7,7 +7,7 @@ module.exports = function (app) {
   const { Schema } = mongooseClient;
   const heroes = new Schema({
     name: { type: String, required: false, default: "Yuusha" },
-    healthPoints: { type: Number, required: true },
+    healthPoints: { type: Array, required: true, default: [1,1,1] },
     power: { type: Number, required: true }
   }, {
     timestamps: true

@@ -26,8 +26,8 @@ class TextPanel extends Component {
       <Row>
         <Col xs={"2"}>
           <div style={textPanel}>
-            <p className="text" style={textStyle}>{this.props.message}</p>
-            <p className="text" style={textStyle}>{this.props.message2}</p>
+            <p className="text" style={textStyle}>{this.props.gameInfos.message}</p>
+            <p className="text" style={textStyle}>{this.props.gameInfos.message2}</p>
           </div>
         </Col>
       </Row>

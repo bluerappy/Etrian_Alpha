@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import potion from '../../images/potion.png'
 
-const potionStyle = {
+const potionIconStyle = {
     padding: "1px",
     borderRadius: "8px",
     border:" 4px solid #eaebea",
@@ -13,7 +13,7 @@ const potionStyle = {
     display : "flex"
   };
 
-const textStyle = {
+const pStyle = {
     color: "white",
     fontWeight: "bold",
     position : "absolute",
@@ -24,11 +24,11 @@ class LifePotionCount extends Component {
     render() {
         // console.log("lifePotionCount",this.props.lifePotionCount)
         return (
-          <div style={potionStyle}>
+          <div style={potionIconStyle}>
             <div >
               <img src={potion} alt="monster" width="50" height="50" />
             </div>
-            <div style={textStyle}>
+            <div style={pStyle}>
               <p>x {this.props.lifePotionCount}</p>
             </div>
         </div>

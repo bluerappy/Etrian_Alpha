@@ -13,8 +13,8 @@ const monsterStyle = {
 class MonstersChara extends Component {
     render() {
       // console.log("game over", this.props.gameOver)
-      //   console.log("image", this.props.monsterStats.monsterImage)
-        if (this.props.gameOver === true) {
+        // console.log("image", this.props.monsterStats.monsterHealth)
+        if (this.props.gameInfos.gameOver === true) {
           return (
             <div className="row">
              <div style={monsterStyle}>
