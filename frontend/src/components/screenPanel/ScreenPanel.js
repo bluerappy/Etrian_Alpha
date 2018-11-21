@@ -24,30 +24,30 @@ const divStyle = {
 
 class ScreenPanel extends Component {
 _onClickSword() {
-    console.log("Sword", this.props.swordCount)
+    console.log("Sword", this.props.items.swordCount)
 }
 _onClickLifePotion() {
-    console.log("LifePotion", this.props.lifePotionCount)
+    console.log("LifePotion", this.props.items.lifePotionCount)
 }
     render() {
-        // console.log("screenpanel",this.props.swordCount)
+        // console.log("screenpanel",this.props.clearance.stepsDone)
         return (
           <Row>
             <Col xs={"2"}>
               <div style={divStyle}>
-              <StageCount stage={this.props.stage} stepsForNextStage={this.props.stepsForNextStage} stepsDone={this.props.stepsDone}/>
+              <StageCount clearance={this.props.clearance}/>
                 <SupportChara swordCount={this.props.swordCount}/>
-                <MonstersChara monsterStats={this.props.monsterStats} gameOver={this.props.gameOver}/>
+                <MonstersChara monsterStats={this.props.monsterStats} gameInfos={this.props.gameInfos}/>
                 <div>
-                <HealthBar health={this.props.health}/>
-                <StatusIcon status={this.props.status}/>
+                <HealthBar heroesData={this.props.heroesData}/>
+                <StatusIcon status={this.props.heroesData.status}/>
                 </div>
               
                   <div onClick={()=>this._onClickSword()}> 
-                    <SwordCount swordCount={this.props.swordCount}/>
+                    <SwordCount swordCount={this.props.items.swordCount}/>
                   </div>
                   <div onClick={()=>this._onClickLifePotion()}>
-                    <LifePotionCount lifePotionCount={this.props.lifePotionCount}/>
+                    <LifePotionCount lifePotionCount={this.props.items.lifePotionCount}/>
                   </div>
               </div>
             </Col>

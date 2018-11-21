@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import StepsCount from './stepsCount';
+import StepsCountInStage from './stepsCountInStage';
 
 const stageStyle = {
   position: "absolute",
@@ -19,8 +19,8 @@ class StageCount extends Component {
     render() {
         return (
           <div style={stageStyle}>
-            <p>STAGE {this.props.stage} </p>
-            <StepsCount stepsForNextStage={this.props.stepsForNextStage} stepsDone={this.props.stepsDone}/>
+            <p>STAGE {this.props.clearance.stage} </p>
+            <StepsCountInStage clearance={this.props.clearance}/>
           </div>
         );
     }
