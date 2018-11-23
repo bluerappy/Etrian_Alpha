@@ -18,14 +18,20 @@ const pStyle = {
 
 class InfosPanel extends Component {
     render() {
-        // console.log("screenpanel",this.props.swordCount)
-        return (
-          <div style={divStyle}>
+      return (
+        <div style={divStyle}>
+          <div>
             <p style={pStyle}>Infos Panel</p>
-            <p>Hero Name</p>
-            <p>Level</p>
-            <p>Experience</p>
+            <p>Hero Name : {this.props.heroesData.name}</p>
+            <p>Level : {this.props.heroesData.level}</p>
+            <p>Power : {this.props.heroesData.power}</p>
+            <p>Experience : {this.props.heroesData.experiencePoints} / {this.props.heroesData.experienceForLevelUp}</p>
           </div>
+          <div>
+            <hr/>
+            <p>Status : {this.props.heroesData.status}</p>
+          </div>
+        </div>
         );
     }
 }

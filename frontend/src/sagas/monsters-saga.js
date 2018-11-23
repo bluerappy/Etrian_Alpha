@@ -41,6 +41,9 @@ function addMonstersFunction(monster) {
     type : monster.type,
     healthPoints : monster.healthPoints,
     power : monster.power,
-    image : monster.image
+    image : monster.image,
+    level : monster.level,
+    itemsDrop : monster.items,
+    experiencePots : monster.experience
   })
 }

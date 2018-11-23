@@ -28,6 +28,7 @@ _onClickSword() {
 }
 _onClickLifePotion() {
     console.log("LifePotion", this.props.items.lifePotionCount)
+    this.props.clickPotion();
 }
     render() {
         // console.log("screenpanel",this.props.clearance.stepsDone)

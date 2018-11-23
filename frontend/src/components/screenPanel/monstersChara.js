@@ -29,7 +29,7 @@ class MonstersChara extends Component {
             <div className="row">
               <div style={monsterStyle}>
                 <img src={this.props.monsterStats.monsterImage} alt="monster" width="250" height="250" />
-                  <p>{this.props.monsterStats.monsterName}</p>
+                  <p>[ {this.props.monsterStats.monsterName} ]</p>
                   <MonsterLifeBar monsterHealth={this.props.monsterStats.monsterHealth}>
                       <p>{this.props.monsterStats.monsterHealth}PV</p>
                   </MonsterLifeBar>

@@ -3,11 +3,14 @@ import { Button, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 class monstersAddForm extends Component {
   state = {
+    level : null,
     name : null,
     type : null,
     healthPoints : null,
     power : null,
-    image : null
+    image : null,
+    items : null,
+    experience: null,
   };
 
   handleChange = (event) => {
@@ -28,6 +31,10 @@ class monstersAddForm extends Component {
             <Input type="text" name="name" onChange={this.handleChange} placeholder="ex : Slime" valid={name ? true : false}/>
         </FormGroup>
         <FormGroup>
+          <Label>Level</Label>
+            <Input type="number" name="level" placeholder="default : 1" onChange={this.handleChange} />
+        </FormGroup>
+        <FormGroup>
           <Label>Element Type</Label>
             <Input type="text" name="type" placeholder="ex : Fire (Optional)" onChange={this.handleChange} />
         </FormGroup>
@@ -38,6 +45,14 @@ class monstersAddForm extends Component {
         <FormGroup>
           <Label>Power</Label>
             <Input type="number" name="power" placeholder="ex : 2" onChange={this.handleChange} valid={power ? true : false} />
+        </FormGroup>
+        <FormGroup>
+          <Label>Items Drop</Label>
+            <Input type="text" name="itemps" placeholder="default : lifePotion" onChange={this.handleChange} />
+        </FormGroup>
+        <FormGroup>
+          <Label>XP Drop</Label>
+            <Input type="number" name="experience" placeholder="default : 1" onChange={this.handleChange} />
         </FormGroup>
         {/* <FormGroup>
         <Label>Art Image</Label>
