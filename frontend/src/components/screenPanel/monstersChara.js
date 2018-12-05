@@ -12,8 +12,6 @@ const monsterStyle = {
 
 class MonstersChara extends Component {
     render() {
-      // console.log("game over", this.props.gameOver)
-        // console.log("image", this.props.monsterStats.monsterHealth)
         if (this.props.gameInfos.gameOver === true) {
           return (
             <div className="row">
@@ -27,7 +25,7 @@ class MonstersChara extends Component {
         if(this.props.monsterStats.monsterAppearance === true) {
           return (
             <div className="row">
-              <div style={monsterStyle}>
+              <div onClick={this.props.attack} style={monsterStyle}>
                 <img src={this.props.monsterStats.monsterImage} alt="monster" width="250" height="250" />
                   <p>[ {this.props.monsterStats.monsterName} ]</p>
                   <MonsterLifeBar monsterHealth={this.props.monsterStats.monsterHealth}>

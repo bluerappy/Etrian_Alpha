@@ -13,6 +13,18 @@ const swordStyle = {
     display: "flex",
   };
 
+  const swordStyleGOLD = {
+    padding: "1px",
+    borderRadius: "8px",
+    border:" 4px solid #FFD700",
+    width: "60px",
+    height: "60px",
+    backgroundColor : "#FFFACD",
+    position : "absolute",
+    top : "25px",
+    display: "flex",
+  };
+
 const textStyle = {
     color: "white",
     fontWeight: "bold",
@@ -22,9 +34,8 @@ const textStyle = {
 
 class SwordCount extends Component {
   render() {
-    // console.log("swordcount",this.props.swordCount)
     return (
-      <div style={swordStyle}>
+      <div style={this.props.useSpecial === false ? swordStyle : swordStyleGOLD}>
         <div>
           <img src={sword} alt="monster" width="50" height="50" />
         </div>

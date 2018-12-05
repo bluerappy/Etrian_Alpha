@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import armorImage from '../../images/armor.png'
+import helmetImage from '../../images/helmet.png';
 // import { Row, Col } from 'reactstrap';
 
 const divStyle = {
@@ -16,6 +18,22 @@ const pStyle = {
     fontWeight: 'bold'
   };
 
+const armorStyle = {
+  display: 'block',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  marginTop: '220px',
+  position: "absolute",
+};
+
+const helmetStyle = {
+  display: 'block',
+  marginRight: 'auto',
+  marginLeft : '41px',
+  marginTop: '100px',
+  position: "absolute",
+};
+
 class InfosPanel extends Component {
     render() {
       return (
@@ -30,6 +48,13 @@ class InfosPanel extends Component {
           <div>
             <hr/>
             <p>Status : {this.props.heroesData.status}</p>
+          </div>
+
+          <div> 
+            <img style={helmetStyle} src={helmetImage} alt="helmet" width="120" height="120" />
+          </div>
+          <div> 
+            <img style={armorStyle} src={armorImage} alt="armor" width="200" height="200" />
           </div>
         </div>
         );

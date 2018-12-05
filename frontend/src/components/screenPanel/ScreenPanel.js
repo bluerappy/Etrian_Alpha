@@ -17,35 +17,28 @@ const divStyle = {
     backgroundColor: "black"
   };
 
-// const pStyle = {
-//     fontSize: '15px',
-//     textAlign: 'center'
-//   };
-
 class ScreenPanel extends Component {
 _onClickSword() {
-    console.log("Sword", this.props.items.swordCount)
+    this.props.useSpecialWeapon();
 }
 _onClickLifePotion() {
-    console.log("LifePotion", this.props.items.lifePotionCount)
     this.props.clickPotion();
 }
     render() {
-        // console.log("screenpanel",this.props.clearance.stepsDone)
         return (
           <Row>
             <Col xs={"2"}>
               <div style={divStyle}>
               <StageCount clearance={this.props.clearance}/>
                 <SupportChara swordCount={this.props.swordCount}/>
-                <MonstersChara monsterStats={this.props.monsterStats} gameInfos={this.props.gameInfos}/>
+                <MonstersChara attack={this.props.attack} monsterStats={this.props.monsterStats} gameInfos={this.props.gameInfos}/>
                 <div>
                 <HealthBar heroesData={this.props.heroesData}/>
                 <StatusIcon status={this.props.heroesData.status}/>
                 </div>
               
                   <div onClick={()=>this._onClickSword()}> 
-                    <SwordCount swordCount={this.props.items.swordCount}/>
+                    <SwordCount useSpecial={this.props.useSpecial} swordCount={this.props.items.swordCount}/>
                   </div>
                   <div onClick={()=>this._onClickLifePotion()}>
                     <LifePotionCount lifePotionCount={this.props.items.lifePotionCount}/>

@@ -19,7 +19,8 @@ class MainScreen extends Component {
             power: 2
           },
           items : {
-            swordCount: 2,
+            swordCount: 3,
+            useSpecial : false,
             weaponDurability: 5,
             lifePotionCount: 10,
             antidotePotionCount: 0,
@@ -50,6 +51,7 @@ class MainScreen extends Component {
           others : {
             monsterAttackDice : 0,
             monsterDamageDice : 0,
+            randomPick : 0,
           }
         };
       }
@@ -103,8 +105,12 @@ static getDerivedStateFromProps(props, state) {
                       };
 
   if ( state.monsterStats.monsterHealth <= 0 && state.monsterStats.monsterAppearance === true ) {
+
     const heroesActualExperience = state.heroesData.experiencePoints;
     const monsterExpDrop = state.monsterStats.experiencePots;
+    const itemsDropWin = state.monsterStats.itemsDrop;
+    const dropChance =  Math.floor(Math.random() * Math.floor(2));
+
     return {
       monsterStats : {
         ...state.monsterStats,
@@ -129,17 +135,15 @@ static getDerivedStateFromProps(props, state) {
       heroesData : {
         ...state.heroesData,
         experiencePoints : (heroesActualExperience+monsterExpDrop),
-      }
+      },
+      items : {
+        ...state.items,
+        lifePotionCount : (dropChance === 1 && itemsDropWin === "lifePotion") ? state.items.lifePotionCount+1: state.items.lifePotionCount,
+        antidotePotionCount : (dropChance === 1 && itemsDropWin === "antidotePotionCount") ? state.items.antidotePotionCount+1: state.items.antidotePotionCount,
+        swordCount : (dropChance === 1 && itemsDropWin === "swordCount") ? state.items.swordCount+1: state.items.swordCount,
+            }
     }
   };
-  // if ( state.heroesData.experiencePoints >= state.heroesData.experienceForLevelUp ) {
-  //   return {
-  //     heroesData : {
-  //       ...state.heroesData,
-  //       level : state.heroesData.level+1,
-  //     }
-  //   }
-  // };
   return state;
 }
 //--------------------------------------------------------------//
@@ -208,10 +212,70 @@ _drinkPotion() {
   }
 }
 
+_useSpecialWeapon() {
+  const { gameOver } = this.state.gameInfos;
+  const { swordCount, useSpecial } = this.state.items;
+  const { monsterAppearance } = this.state.monsterStats;
+ 
+  if ( monsterAppearance === false ) {
+     this.setState(prevState => ({
+      gameInfos: {
+          ...prevState.gameInfos,
+          message: "Vous n'êtes pas en combat",
+          message2: ''
+      }
+  }));
+  }
+
+  else if (useSpecial === false && swordCount > 0) {
+    let actualSwordCount = swordCount;
+    this.setState(prevState => ({
+      gameInfos: {
+          ...prevState.gameInfos,
+          message: "Vous préparez une attaque spéciale !",
+          message2: ""
+      },
+      items : {
+        ...prevState.items,
+        swordCount : (actualSwordCount-1),
+        useSpecial : true
+      }
+  }));
+  }
+
+  else if (useSpecial === true) {
+    let actualSwordCount = swordCount;
+    this.setState(prevState => ({
+      gameInfos: {
+          ...prevState.gameInfos,
+          message: "Vous décidez de ranger votre arme spéciale.",
+          message2: ""
+      },
+      items : {
+        ...prevState.items,
+        swordCount : (actualSwordCount+1),
+        useSpecial : false
+      }
+  }));
+  }
+
+  else if (swordCount === 0) {
+    this.setState(prevState => ({
+     gameInfos: {
+         ...prevState.gameInfos,
+         message: "Vous n'avez plus d'armes spéciales sur vous.",
+     }
+ }));
+ }
+
+}
+
+
 //------------------------FIGHT ALGORYTHM------------------------//
 _attaque = () => {
   const { health } = this.state.heroesData;
   const { monsterHealth, monsterAttack} = this.state.monsterStats;
+  const { useSpecial } = this.state.items;
   const monsterAttackChance =1;
   const monsterDamage = Math.floor(Math.random() * Math.floor(monsterAttack+1));
     this.setState(prevState => ({
@@ -237,9 +301,41 @@ _attaque = () => {
   }));
   }
   
-  if (monsterHealth > 0 && health.length > 0) {
+    if (monsterHealth > 0 && useSpecial===true ) {
     const heroesPower = this.state.heroesData.power;
-    const heroesStrike = (Math.floor(Math.random() * Math.floor(2))) + heroesPower;
+    this.setState(prevState => ({
+      monsterStats: {
+          ...prevState.monsterStats,
+          monsterHealth: monsterHealth-heroesPower,
+      },
+      gameInfos: {
+          ...prevState.gameInfos,
+          message : `Vous frappez avec votre arme spéciale et lui infligez ` + heroesPower + ` dégat(s) !`
+      },
+      items: {
+        ...prevState.items,
+        useSpecial: false,
+      }
+  }), () => { if (this.state.heroesData.experiencePoints >= this.state.heroesData.experienceForLevelUp) { //CALL BACK FOR INSTANT LEVEL UP
+    const OldExperienceNeeded = this.state.heroesData.experienceForLevelUp;
+    const OldPower = this.state.heroesData.power;
+    const experienceNeedsUp = (Math.floor(Math.random() * Math.floor(7)))+OldExperienceNeeded+1;
+    const newPower = (Math.floor(Math.random() * Math.floor(3)))+OldPower;
+    this.setState(prevState => ({
+      heroesData: {
+          ...prevState.heroesData,
+          level : this.state.heroesData.level+1,
+          experiencePoints : 0,
+          experienceForLevelUp : experienceNeedsUp,
+          power : newPower,
+      }
+  }))
+  }})
+ };
+
+  if (monsterHealth > 0 && useSpecial === false) {
+    const heroesPower = this.state.heroesData.power;
+    const heroesStrike = (Math.floor(Math.random() * Math.floor(heroesPower)));
     this.setState(prevState => ({
       monsterStats: {
           ...prevState.monsterStats,
@@ -247,12 +343,12 @@ _attaque = () => {
       },
       gameInfos: {
           ...prevState.gameInfos,
-          message : `Vous lui infligez ` + heroesStrike + ` dégat(s) !`
+          message : heroesStrike === 0 ? `Vous échouez votre attaque lamentablement...` : `Vous lui infligez ` + heroesStrike + ` dégat(s) !`
       }
   }), () => { if (this.state.heroesData.experiencePoints >= this.state.heroesData.experienceForLevelUp) { //CALL BACK FOR INSTANT LEVEL UP
     const OldExperienceNeeded = this.state.heroesData.experienceForLevelUp;
     const OldPower = this.state.heroesData.power;
-    const experienceNeedsUp = (Math.floor(Math.random() * Math.floor(10)))+OldExperienceNeeded+1;
+    const experienceNeedsUp = (Math.floor(Math.random() * Math.floor(7)))+OldExperienceNeeded+1;
     const newPower = (Math.floor(Math.random() * Math.floor(3)))+OldPower;
     this.setState(prevState => ({
       heroesData: {
@@ -266,6 +362,28 @@ _attaque = () => {
   }})
  };
 }
+
+monsterEncounter = () => {
+  const randomPick = Math.floor(Math.random() * Math.floor(this.props.monstersList.data.length));
+
+  this.setState( prevState => ({
+    monsterStats: {
+      ...prevState.monsterStats,
+      monsterAppearance: true,
+      level : this.props.monstersList.data[randomPick].level,
+      monsterName : this.props.monstersList.data[randomPick].name,
+      monsterHealth : this.props.monstersList.data[randomPick].healthPoints,
+      monsterAttack : this.props.monstersList.data[randomPick].power,
+      monsterImage : this.props.monstersList.data[randomPick].image,
+      experiencePots : this.props.monstersList.data[randomPick].experiencePots,
+      itemsDrop : this.props.monstersList.data[randomPick].itemsDrop
+    },
+    gameInfos: {
+      ...prevState.gameInfos,
+      message2: 'Un monstre est apparu !'}
+    }));
+}
+
 
 //------------------------WALK ALGORYTHM------------------------//
 _walk() {
@@ -322,37 +440,22 @@ _walk() {
       }
   }));
 };
+
     //---------------WALK ALGORYTHM { ENCOUNTER CASE }------------------// 
     if (encounter ===  1 && actualStage === stage) {
-      const randomPick = Math.floor(Math.random() * Math.floor(this.props.monstersList.data.length));
-       this.setState( prevState => ({
-        monsterStats: {
-            ...prevState.monsterStats,
-            monsterAppearance: true,
-            monsterName : this.props.monstersList.data[randomPick].name,
-            monsterHealth : this.props.monstersList.data[randomPick].healthPoints,
-            monsterAttack : this.props.monstersList.data[randomPick].power,
-            monsterImage : this.props.monstersList.data[randomPick].image,
-            experiencePots : this.props.monstersList.data[randomPick].experiencePots,
-            itemsDrop : this.props.monstersList.data[randomPick].itemsDrop
-          }
-       }) , this.setState(prevState => ({ 
-                            gameInfos: {
-                            ...prevState.gameInfos,
-                            message2: 'Un monstre est apparu !',
-                          },
-    })))  
-    }
+      this.monsterEncounter()
+    };
   }
 
     render() {
       const { monsterAppearance } = this.state.monsterStats;
       const { gameOver } = this.state.gameInfos;
+      const { useSpecial } = this.state.items;
       return (
         <div>
           <Row>
             <Col>
-             <ScreenPanel clickPotion={()=>this._drinkPotion()} monsterStats={this.state.monsterStats} heroesData={this.state.heroesData} items={this.state.items} clearance={this.state.clearance} gameInfos={this.state.gameInfos}/>
+             <ScreenPanel attack={() => this._attaque()} useSpecial={useSpecial} clickPotion={()=>this._drinkPotion()} useSpecialWeapon={()=>this._useSpecialWeapon()} monsterStats={this.state.monsterStats} heroesData={this.state.heroesData} items={this.state.items} clearance={this.state.clearance} gameInfos={this.state.gameInfos}/>
              <TextPanel gameInfos={this.state.gameInfos}/>
              <ButtonGroup size="sm">
               <div><Button onClick={()=>this._changeStatus()}>CHANGE STATUS TEST</Button></div>
