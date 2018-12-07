@@ -22,6 +22,11 @@ class HealthBar extends Component {
   };
 
   render() {
+    if (!this.props.heroesData.health) {
+      return (
+        <div></div>
+      )
+    }
     return (
       <div>
         {this.healthIconMap()}

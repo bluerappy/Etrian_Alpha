@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Row, Col } from 'reactstrap';
-import MainScreen from './containers/containerMain';
 import MonsterAdd from './containers/forms/containerMonsterAdd';
-import InfosPanel from './components/infosPanel/infosPanel';
+import LoadingPage from './containers/containerLoading';
 
 class App extends Component {
   render() {
@@ -11,10 +10,8 @@ class App extends Component {
       <div className="App">
         <Row>
           <Col>
-           <MainScreen/>
-          </Col>
-          <Col>
-          <InfosPanel/>
+           {/* <MainScreen/> */}
+           <LoadingPage/>
           </Col>
         </Row>
         <MonsterAdd/>

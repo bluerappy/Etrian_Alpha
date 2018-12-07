@@ -1,10 +1,12 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import app from '../config/app-Feathers';
+import { GETMONSTERS_REQUEST, ADD_MONSTERS } from '../actions/monsters-action';
+
 
 export default function* getMonstersListWatcherSaga() {
   // console.log("monster watcher")
-    yield takeLatest("GETMONSTERS_REQUEST" , getMonstersListWorkerSaga);
-    yield takeLatest("ADD_MONSTERS" , addMonsters);
+    yield takeLatest(GETMONSTERS_REQUEST , getMonstersListWorkerSaga);
+    yield takeLatest(ADD_MONSTERS , addMonsters);
   }
 
 //get monsterlist worker
@@ -41,6 +43,9 @@ function addMonstersFunction(monster) {
     type : monster.type,
     healthPoints : monster.healthPoints,
     power : monster.power,
-    image : monster.image
+    image : monster.image,
+    level : monster.level,
+    itemsDrop : monster.items,
+    experiencePots : monster.experience
   })
 }
